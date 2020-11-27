@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 8.0.18)
 # Database: sgc_webies
-# Generation Time: 2020-11-20 12:44:02 +0000
+# Generation Time: 2020-11-27 10:01:05 +0000
 # ************************************************************
 
 
@@ -141,6 +141,7 @@ CREATE TABLE `movies` (
   `trailer_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `released_at` datetime DEFAULT NULL,
   `published_at` timestamp NULL DEFAULT NULL,
+  `published_until` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
