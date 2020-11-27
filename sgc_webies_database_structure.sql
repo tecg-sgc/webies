@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 8.0.18)
 # Database: sgc_webies
-# Generation Time: 2020-11-27 10:01:05 +0000
+# Generation Time: 2020-11-27 10:38:04 +0000
 # ************************************************************
 
 
@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS `discounts`;
 
 CREATE TABLE `discounts` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `percentage` float(3,2) NOT NULL,
+  `percentage` float(5,2) NOT NULL,
   `conditions` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `activated` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
