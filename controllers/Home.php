@@ -11,8 +11,6 @@ class Home
         $this->header = $header;
         $this->links = NavigationLink::getAllDisplayed();
         $this->featured = Movie::getFeatured();
-
-        var_dump($this->featured); die();
     }
 
     public function render()

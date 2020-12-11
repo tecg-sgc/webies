@@ -1,35 +1,32 @@
 <?php
 
-class Producer extends Model
+class Genre extends Model
 {
     public $id;
-    public $firstname;
-    public $lastname;
+    public $label;
+    public $slug;
 
     public function __construct($data)
     {
         $this->id = $data['id'];
-        $this->firstname = $data['firstname'];
-        $this->lastname = $data['lastname'];
+        $this->label = json_decode($data['label'])->fr;
+        $this->slug = json_decode($data['slug'])->fr;
     }
 
     static public function getForMovieId($id)
     {
         // 1. Effectuer la requête en base de données
         $results = static::fetchAll(
-            'SELECT 
-            p.id,
-            p.firstname,
-            p.lastname
-            FROM producers p
-            JOIN movie_producer mp ON mp.producer_id = p.id
-            WHERE mp.movie_id = :id
-            AND p.deleted_at IS NULL;
+            'SELECT g.id, g.label, g.slug
+            FROM genres g
+            JOIN genre_movie gm ON gm.genre_id = g.id
+            WHERE gm.movie_id = :id
+            ORDER BY gm.order;
         ', ['id' => $id]);
 
         // 2. Créer une instance par ligne récupérée
         foreach ($results as $index => $line) {
-            $results[$index] = new Producer($line);
+            $results[$index] = new Genre($line);
         }
 
         // 3. Retourner toutes ces instances ainsi créées

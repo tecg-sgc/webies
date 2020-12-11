@@ -27,7 +27,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </ul>
             </div>
         <div class="main">
-        <div class="header">
+        <div class="header" style="background: url(<?= $featured->featured_img ?>);">
             <div class="top-header">
                 <div class="logo">
                     <a href="index.html"><img src="images/logo.png" alt="" /></a>
@@ -42,14 +42,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="clearfix"></div>
             </div>
             <div class="header-info">
-                <h1>BIG HERO 6</h1>
-                <p class="age"><a href="https://webies.com/publics/all-age">All Age</a> Don Hall, Chris Williams</p>
-                <p class="review">Rating    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;  8,5/10</p>
-                <p class="review reviewgo">Genre    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp; Animation, Action, Comedy</p>
-                <p class="review">Release &nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp; 7 November 2014</p>
-                <p class="special">The special bond that develops between plus-sized inflatable robot Baymax, and prodigy Hiro Hamada, who team up with a group of friends to form a band of high-tech heroes.</p>
-                <a class="video" href="#"><i class="video1"></i>WATCH TRAILER</a>
-                <a class="book" href="#"><i class="book1"></i>BOOK TICKET</a>
+                <h1><?= $featured->title; ?></h1>
+                <p class="age age--<?= $featured->public_color; ?>"><a href="https://webies.com/publics/<?= $featured->public_slug; ?>"><?= $featured->public_label; ?></a></p>
+                <ul class="producers">
+                    <?php foreach($featured->producers as $producer) : ?>
+                        <li><?= $producer->firstname . ' ' . $producer->lastname; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <p class="review">Rating&nbsp;: <?= number_format($featured->rating, 1, ',', ' '); ?>/10</p>
+                <p class="review reviewgo">Genres&nbsp;:</p>
+                <ol>
+                    <?php foreach($featured->genres as $genre): ?>
+                        <li><a href="https://webies.com/genres/<?= $genre->slug; ?>"><?= $genre->label; ?></a></li>
+                    <?php endforeach; ?>
+                </ol>
+                <p class="review">Release&nbsp;: <time datetime="<?= date('c', strtotime($featured->released_at)); ?>"><?= date('d F Y', strtotime($featured->released_at)); ?></time></p>
+                <p class="special"><?= $featured->description; ?></p>
+                <a class="video" href="<?= $featured->trailer_url; ?>"><i class="video1"></i>WATCH TRAILER</a>
+                <a class="book" href="https://webies.com/movies/<?= $featured->slug; ?>"><i class="book1"></i>BOOK TICKET</a>
             </div>
         </div>
         <div class="review-slider">
