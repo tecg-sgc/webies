@@ -43,21 +43,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="header-info">
                 <h1><?= $featured->title; ?></h1>
-                <p class="age age--<?= $featured->public_color; ?>"><a href="https://webies.com/publics/<?= $featured->public_slug; ?>"><?= $featured->public_label; ?></a></p>
-                <ul class="producers">
-                    <?php foreach($featured->producers as $producer) : ?>
-                        <li><?= $producer->firstname . ' ' . $producer->lastname; ?></li>
-                    <?php endforeach; ?>
-                </ul>
-                <p class="review">Rating&nbsp;: <?= number_format($featured->rating, 1, ',', ' '); ?>/10</p>
-                <p class="review reviewgo">Genres&nbsp;:</p>
-                <ol>
-                    <?php foreach($featured->genres as $genre): ?>
-                        <li><a href="https://webies.com/genres/<?= $genre->slug; ?>"><?= $genre->label; ?></a></li>
-                    <?php endforeach; ?>
-                </ol>
-                <p class="review">Release&nbsp;: <time datetime="<?= date('c', strtotime($featured->released_at)); ?>"><?= date('d F Y', strtotime($featured->released_at)); ?></time></p>
+
+                <div class="featured-info">
+                    <p class="age age--<?= $featured->public_color; ?>">
+                        <a href="https://webies.com/publics/<?= $featured->public_slug; ?>"><?= $featured->public_label; ?></a>
+                    </p>
+                    <ul class="producers">
+                        <?php foreach($featured->producers as $producer) : ?>
+                            <li><?= $producer->firstname . ' ' . $producer->lastname; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                
+                <dl class="featured-definition">
+                    <dt>Rating</dt>
+                    <dd><?= number_format($featured->rating, 1, ',', ' '); ?>/10</dd>
+                    <dt>Genres</dt>
+                    <dd>
+                        <ol>
+                            <?php foreach($featured->genres as $genre): ?>
+                                <li><a href="https://webies.com/genres/<?= $genre->slug; ?>"><?= $genre->label; ?></a></li>
+                            <?php endforeach; ?>
+                        </ol>
+                    </dd>
+                    <dt>Release</dt>
+                    <dd>
+                        <time datetime="<?= date('c', strtotime($featured->released_at)); ?>"><?= date('d F Y', strtotime($featured->released_at)); ?></time>
+                    </dd>
+                </dl>
+
                 <p class="special"><?= $featured->description; ?></p>
+
                 <a class="video" href="<?= $featured->trailer_url; ?>"><i class="video1"></i>WATCH TRAILER</a>
                 <a class="book" href="https://webies.com/movies/<?= $featured->slug; ?>"><i class="book1"></i>BOOK TICKET</a>
             </div>
