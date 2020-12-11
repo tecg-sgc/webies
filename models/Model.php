@@ -4,7 +4,13 @@ abstract class Model
 {
     static public function fetch($sql, $attributes = [])
     {
-        // $query = $this->connexion();
+        $pdo = static::connexion();
+
+        $query = $pdo->prepare($sql);
+        
+        $query->execute($attributes);
+
+        return $query->fetch();
     }
 
     static public function fetchAll($sql, $attributes = [])
