@@ -6,13 +6,15 @@ class Home
     public $links;
     public $featured;
     public $recentlyReleasedMovies;
+    public $teased;
 
     public function __construct($header)
     {
         $this->header = $header;
         $this->links = NavigationLink::getAllDisplayed();
         $this->featured = Movie::getFeatured();
-        $this->recentlyReleasedMovies = Movie::getRecentlyReleasedMovies();
+        $this->recentlyReleasedMovies = Movie::getRecentlyReleased();
+        $this->teased = Movie::getTeased();
     }
 
     public function render()

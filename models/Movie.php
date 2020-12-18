@@ -80,7 +80,7 @@ class Movie extends Model
         return $result;
     }
 
-    static public function getRecentlyReleasedMovies()
+    static public function getRecentlyReleased()
     {
         $results = static::fetchAll('
             SELECT m.id, m.cover_img, m.cover_alt, m.slug
@@ -97,5 +97,23 @@ class Movie extends Model
         }
 
         return $results;
+    }
+
+    static public function getTeased()
+    {
+        $result = static::fetch('
+            SELECT id, trailer_url
+            FROM movies
+            WHERE teased = 1
+            AND (published_until IS NULL OR published_until > NOW())
+            AND published_at <= NOW()
+            AND deleted_at IS NULL
+            ORDER BY released_at DESC
+            LIMIT 1;
+        ');
+
+        $result = new Movie($result);
+
+        return $result;
     }
 }

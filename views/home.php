@@ -118,7 +118,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <script type="text/javascript" src="js/jquery.flexisel.js"></script>    
         </div>
         <div class="video">
-            <iframe  src="https://www.youtube.com/embed/2LqzF5WauAw" frameborder="0" allowfullscreen></iframe>
+            <iframe src="<?= $teased->trailer_url; ?>" frameborder="0" allowfullscreen></iframe>
         </div>
         <div class="news">
             <div class="col-md-6 news-left-grid">
