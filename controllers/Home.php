@@ -8,6 +8,7 @@ class Home
     public $recentlyReleasedMovies;
     public $teased;
     public $articles;
+    public $publishedMovies;
 
     public function __construct($header)
     {
@@ -17,6 +18,7 @@ class Home
         $this->recentlyReleasedMovies = Movie::getRecentlyReleased();
         $this->teased = Movie::getTeased();
         $this->articles = Article::getRecentlyPublished();
+        $this->publishedMovies = Movie::getRecentlyPublished();
     }
 
     public function render()

@@ -116,4 +116,23 @@ class Movie extends Model
 
         return $result;
     }
+
+    static public function getRecentlyPublished()
+    {
+        $results = static::fetchAll('
+            SELECT m.id, m.cover_img, m.cover_alt, m.slug
+            FROM movies m
+            WHERE (m.published_until IS NULL OR m.published_until > NOW())
+            AND m.published_at <= NOW()
+            AND m.deleted_at IS NULL
+            ORDER BY m.released_at DESC
+            LIMIT 6,20;
+        ');
+
+        foreach ($results as $index => $line) {
+            $results[$index] = new Movie($line);
+        }
+
+        return $results;
+    }
 }

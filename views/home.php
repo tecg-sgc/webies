@@ -144,12 +144,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"></div>
         </div>
         <div class="more-reviews">
-             <ul id="flexiselDemo2">
-            <li><img src="images/m1.jpg" alt=""/></li>
-            <li><img src="images/m2.jpg" alt=""/></li>
-            <li><img src="images/m3.jpg" alt=""/></li>
-            <li><img src="images/m4.jpg" alt=""/></li>
-        </ul>
+            <ul id="flexiselDemo2">
+            <?php foreach($publishedMovies as $movie) : ?>
+                <li>
+                    <a href="https://webies.com/movies/<?= $movie->slug; ?>">
+                        <img src="<?= $movie->cover_img; ?>" alt="<?= $movie->cover_alt; ?>">
+                    </a>
+                </li>
+            <?php endforeach; ?>
+            </ul>
             <script type="text/javascript">
         $(window).load(function() {
             
