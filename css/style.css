@@ -438,25 +438,35 @@ i.contact1 {
 	padding: 0px;
 	list-style-type: none;
 	text-align: center;
+	display: flex !important;
+	justify-content: start;
+	align-items: stretch;
 }
 .nbs-flexisel-inner {
 	overflow: hidden;
 }
 .nbs-flexisel-item {
-	float: left;
 	margin: 0px;
-	padding: 0px;
+	padding: 0 20px;
 	cursor: pointer;
 	position: relative;
 	line-height: 0px;
 }
-.nbs-flexisel-item > img {
-	
+.nbs-flexisel-item > a > img {
 	cursor: pointer;
 	position: relative;
-	  width: 90%;
-  margin: 0 5%;
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
 }
+.nbs-flexisel-item > a,
+.nbs-flexisel-item > a > img {
+	display: block;
+}
+.nbs-flexisel-item > a {
+	height: 100%;
+}
+
 /*** Navigation ***/
 .nbs-flexisel-nav-left {
 	display:none;

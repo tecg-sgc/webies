@@ -16,23 +16,27 @@ class Movie extends Model
     public $rating;
     public $producers;
     public $genres;
+    public $cover_img;
+    public $cover_alt;
 
     public function __construct($data)
     {
-        $this->id = $data['id'];
-        $this->slug = json_decode($data['slug'])->fr;
-        $this->title = json_decode($data['title'])->fr;
-        $this->description = json_decode($data['description'])->fr;
-        $this->featured_img = $data['featured_img'];
-        $this->featured_alt = json_decode($data['featured_alt'])->fr;
-        $this->released_at = $data['released_at'];
-        $this->trailer_url = $data['trailer_url'];
-        $this->public_label = json_decode($data['public_label'])->fr;
-        $this->public_slug = json_decode($data['public_slug'])->fr;
-        $this->public_color = $data['public_color'];
-        $this->rating = $data['rating'];
-        $this->producers = $data['producers'];
-        $this->genres = $data['genres'];
+        $this->id = $data['id'] ?? null;
+        $this->slug = ($data['slug'] ?? null) ? json_decode($data['slug'])->fr : null;
+        $this->title = ($data['title'] ?? null) ? json_decode($data['title'])->fr : null;
+        $this->description = ($data['description'] ?? null) ? json_decode($data['description'])->fr : null;
+        $this->featured_img = $data['featured_img'] ?? null;
+        $this->featured_alt = ($data['featured_alt'] ?? null) ? json_decode($data['featured_alt'])->fr : null;
+        $this->released_at = $data['released_at'] ?? null;
+        $this->trailer_url = $data['trailer_url'] ?? null;
+        $this->public_label = ($data['public_label'] ?? null) ? json_decode($data['public_label'])->fr : null;
+        $this->public_slug = ($data['public_slug'] ?? null) ? json_decode($data['public_slug'])->fr : null;
+        $this->public_color = $data['public_color'] ?? null;
+        $this->rating = $data['rating'] ?? null;
+        $this->producers = $data['producers'] ?? null;
+        $this->genres = $data['genres'] ?? null;
+        $this->cover_img = $data['cover_img'] ?? null;
+        $this->cover_alt = ($data['cover_alt'] ?? null) ? json_decode($data['cover_alt'])->fr : null;
     }
 
     static public function getFeatured()
@@ -57,6 +61,7 @@ class Movie extends Model
             LEFT JOIN (SELECT movie_id, AVG(rating) AS rating FROM reviews GROUP BY movie_id) r ON r.movie_id = m.id
             WHERE m.featured = 1
             AND (m.published_until IS NULL OR m.published_until > NOW())
+            AND m.published_at <= NOW()
             AND m.deleted_at IS NULL
             ORDER BY m.released_at DESC
             LIMIT 1;'
@@ -73,5 +78,24 @@ class Movie extends Model
 
         // 4. Retourner l'instance ainsi créée
         return $result;
+    }
+
+    static public function getRecentlyReleasedMovies()
+    {
+        $results = static::fetchAll('
+            SELECT m.id, m.cover_img, m.cover_alt, m.slug
+            FROM movies m
+            WHERE (m.published_until IS NULL OR m.published_until > NOW())
+            AND m.published_at <= NOW()
+            AND m.deleted_at IS NULL
+            ORDER BY m.released_at DESC
+            LIMIT 6;
+        ');
+
+        foreach ($results as $index => $line) {
+            $results[$index] = new Movie($line);
+        }
+
+        return $results;
     }
 }
