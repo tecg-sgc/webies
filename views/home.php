@@ -130,16 +130,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="col-md-6 news-right-grid">
                 <h3>News</h3>
-                <div class="news-grid">
-                    <h5>Lorem Ipsum Dolor Sit Amet</h5>
-                    <label>Nov 11 2014</label>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-                </div>
-                <div class="news-grid">
-                    <h5>Lorem Ipsum Dolor Sit Amet</h5>
-                    <label>Nov 11 2014</label>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-                </div>
+
+                <?php foreach($articles as $article) : ?>
+                <article class="news-grid">
+                    <h5><?= $article->title; ?></h5>
+                    <time datetime="<?= date('c', strtotime($article->published_at)); ?>"><?= date('d M Y', strtotime($article->published_at)); ?></time>
+                    <p><?= $article->excerpt; ?></p>
+                </article>
+                <?php endforeach; ?>
+
                 <a class="more" href="#">MORE</a>
             </div>
             <div class="clearfix"></div>

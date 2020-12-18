@@ -7,6 +7,7 @@ class Home
     public $featured;
     public $recentlyReleasedMovies;
     public $teased;
+    public $articles;
 
     public function __construct($header)
     {
@@ -15,6 +16,7 @@ class Home
         $this->featured = Movie::getFeatured();
         $this->recentlyReleasedMovies = Movie::getRecentlyReleased();
         $this->teased = Movie::getTeased();
+        $this->articles = Article::getRecentlyPublished();
     }
 
     public function render()
